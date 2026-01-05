@@ -197,3 +197,411 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Analysis Panel Tabs */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 1rem;
+}
+
+.tab {
+  background: none;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.tab:hover {
+  background-color: #f5f5f5;
+}
+
+.tab.active {
+  border-bottom-color: #4A90E2;
+  color: #4A90E2;
+  font-weight: bold;
+}
+
+.tab-content {
+  padding: 1rem 0;
+}
+
+.functions-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.function-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  background: #f9f9f9;
+}
+
+.function-item h5 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+}
+
+.function-item p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.graph-legend {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+/* Search and Filter Controls */
+.search-filter-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+.search-box {
+  flex: 1;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #4A90E2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.filter-select {
+  min-width: 200px;
+}
+
+.filter-dropdown {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  background: white;
+}
+
+.filter-dropdown:focus {
+  outline: none;
+  border-color: #4A90E2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.entry-point-badge {
+  background: #28a745;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-left: 0.5rem;
+}
+
+.no-results {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 2rem;
+}
+
+/* Progress Bar */
+.progress-container {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4A90E2, #357ABD);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+}
+
+/* Binary Diff Viewer */
+.binary-diff-viewer {
+  max-width: 100%;
+}
+
+.diff-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.diff-stats {
+  display: flex;
+  gap: 1rem;
+}
+
+.stat {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.stat.added {
+  color: #28a745;
+}
+
+.stat.removed {
+  color: #dc3545;
+}
+
+.stat.modified {
+  color: #ffc107;
+}
+
+.diff-controls {
+  margin-bottom: 1rem;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover {
+  background: #f5f5f5;
+}
+
+.filter-btn.active {
+  background: #4A90E2;
+  color: white;
+  border-color: #4A90E2;
+}
+
+.filter-btn.added.active {
+  background: #28a745;
+  border-color: #28a745;
+}
+
+.filter-btn.removed.active {
+  background: #dc3545;
+  border-color: #dc3545;
+}
+
+.filter-btn.modified.active {
+  background: #ffc107;
+  border-color: #ffc107;
+  color: black;
+}
+
+.diff-content {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 1rem;
+}
+
+.diff-list {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.diff-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.diff-item:hover {
+  background: #f8f9fa;
+}
+
+.diff-item.selected {
+  background: #e3f2fd;
+  border-left: 3px solid #4A90E2;
+}
+
+.diff-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.diff-item.added .diff-indicator {
+  background: #d4edda;
+  color: #155724;
+}
+
+.diff-item.removed .diff-indicator {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.diff-item.modified .diff-indicator {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.diff-address {
+  font-family: monospace;
+  font-weight: bold;
+  margin-right: 1rem;
+  min-width: 100px;
+}
+
+.diff-description {
+  flex: 1;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.diff-details {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1rem;
+  background: #f8f9fa;
+}
+
+.detail-row {
+  margin-bottom: 0.5rem;
+}
+
+.detail-row:last-child {
+  margin-bottom: 0;
+}
+
+.type-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.type-badge.added {
+  background: #d4edda;
+  color: #155724;
+}
+
+.type-badge.removed {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.type-badge.modified {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.no-diffs {
+  text-align: center;
+  color: #666;
+  padding: 2rem;
+  font-style: italic;
+}
+
+.diff-note {
+  color: #666;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.diff-placeholder {
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  background: #f8f9fa;
+}
+
+/* Progress Bar */
+.progress-container {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4A90E2, #357ABD);
+  transition: width 0.3s ease;
+  border-radius: 10px;
+}
+
+.progress-text {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}

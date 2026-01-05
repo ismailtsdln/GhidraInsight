@@ -1,6 +1,21 @@
 version: '3.8'
 
 services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: ghidrainsight
+      POSTGRES_USER: ghidrauser
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ghidrainsight
+    restart: unless-stopped
+
   # Java Ghidra Plugin + MCP Server
   ghidra-plugin:
     build:
@@ -34,8 +49,10 @@ services:
       - API_KEY=${API_KEY:-}
       - GHIDRA_HOST=ghidra-plugin
       - GHIDRA_PORT=8000
+      - DATABASE_URL=postgresql://ghidrauser:${POSTGRES_PASSWORD:-changeme}@postgres:5432/ghidrainsight
     depends_on:
       - ghidra-plugin
+      - postgres
     networks:
       - ghidrainsight
     restart: unless-stopped
@@ -57,6 +74,8 @@ services:
 
 volumes:
   binaries:
+    driver: local
+  postgres_data:
     driver: local
 
 networks:

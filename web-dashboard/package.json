@@ -22,7 +22,8 @@
     "@heroicons/react": "^2.0.18",
     "classnames": "^2.3.2",
     "highlight.js": "^11.8.0",
-    "react-syntax-highlighter": "^15.5.0"
+    "react-syntax-highlighter": "^15.5.0",
+    "cytoscape": "^3.28.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.14",
@@ -39,6 +40,7 @@
     "vitest": "^0.34.1",
     "@vitest/ui": "^0.34.1",
     "@testing-library/react": "^14.0.0",
-    "@testing-library/jest-dom": "^5.16.5"
+    "@testing-library/jest-dom": "^5.16.5",
+    "@types/cytoscape": "^3.19.10"
   }
 }
