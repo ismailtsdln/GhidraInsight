@@ -1,33 +1,6 @@
 # GhidraInsight Development Roadmap
 
-## Version 1.1 (Q2 2026) - Current Focus
-
-### Enhanced Analysis
-- [x] Control flow anomaly detection (advanced)
-- [x] Machine learning-based vulnerability detection
-- [x] Pattern library for known exploits
-- [x] Semantic analysis for false positive reduction
-- [x] Parallel analysis for speed improvement
-
-### Frontend Improvements
-- [x] Function graph visualization (Cytoscape)
-- [x] Real-time collaborative analysis
-- [x] Export reports (PDF, HTML, JSON)
-- [x] Binary diff viewer
-- [x] Search and filtering across analysis results
-
-### Backend Enhancements
-- [x] Database backend (PostgreSQL)
-- [x] Analysis caching and incremental updates
-- [x] Distributed analysis (multi-node)
-- [x] WebSocket streaming improvements
-- [x] Advanced error recovery
-
----
-
-## Version 1.2 (Q3 2026)
-
-## Version 1.2 (Q3 2026)
+## Version 1.2 (Q3 2026) - AI-Powered Analysis (IN PROGRESS)
 
 ### LLM Integration
 - [x] Fine-tuned model for binary analysis

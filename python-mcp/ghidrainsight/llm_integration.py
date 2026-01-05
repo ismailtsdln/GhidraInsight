@@ -20,7 +20,7 @@ from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 from azure.core.exceptions import AzureError
 
-from .config import Config
+from .config import Settings
 from .logging_config import get_logger
 
 logger = get_logger(__name__)
@@ -290,7 +290,7 @@ Analyze this pattern:"""
 class LLMIntegration:
     """Main LLM integration class for GhidraInsight"""
 
-    def __init__(self, config: Config):
+    def __init__(self, config: Settings):
         self.config = config
         self.client: Optional[LLMClient] = None
         self._initialize_integration()

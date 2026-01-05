@@ -44,6 +44,7 @@ ghidrainsight analyze --file binary.elf --ai-powered
 - **Symbol Recovery**: Function name inference and type reconstruction
 
 ### 🤖 AI-Powered Analysis
+- **LLM Integration**: Function name generation, automatic comments, vulnerability explanations
 - **ChatGPT/Claude Integration**: Ask natural language questions about binaries
 - **Automated Vulnerability Scanning**: CVSS scores with AI-powered remediation
 - **Pattern Recognition**: ML-based anomaly and weakness detection
