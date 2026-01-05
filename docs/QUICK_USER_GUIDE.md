@@ -168,11 +168,11 @@ docker-compose logs python-mcp
 
 | Belge | İçerik | Kimler İçin |
 |-------|--------|-----------|
-| [README.md](README.md) | Genel Bakış | Tüm Kullanıcılar |
+| [README.md](../README.md) | Genel Bakış | Tüm Kullanıcılar |
 | [EASE_OF_USE_IMPROVEMENTS.md](EASE_OF_USE_IMPROVEMENTS.md) | UX Geliştirmeleri | Geliştiriciler |
 | [INSTALLATION.md](INSTALLATION.md) | Kurulum Detayları | Geliştiriciler |
 | [SECURITY.md](SECURITY.md) | Güvenlik Rehberi | DevOps |
-| [API_REFERENCE.md](docs/API_REFERENCE.md) | API Dökümantasyonu | Entegratörler |
+| [API_REFERENCE.md](API_REFERENCE.md) | API Dökümantasyonu | Entegratörler |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Kod Katkısı | Geliştiriciler |
 
 ---
@@ -293,8 +293,8 @@ asyncio.run(custom_analysis("./binary.elf"))
    ```
 
 ### Orta Seviye
-- [API_REFERENCE.md](docs/API_REFERENCE.md) - REST API
-- [ARCHITECTURE.md](docs/ARCHITECTURE.md) - Sistem tasarımı
+- [API_REFERENCE.md](API_REFERENCE.md) - REST API
+- [ARCHITECTURE.md](ARCHITECTURE.md) - Sistem tasarımı
 - Integration Rehberleri (Claude, OpenAI, MCP)
 
 ### İleri Seviye

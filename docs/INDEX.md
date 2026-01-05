@@ -7,15 +7,15 @@ Welcome to GhidraInsight! This file helps you navigate the comprehensive project
 ## 📚 Quick Navigation
 
 ### 🚀 Getting Started
-1. **First Time?** → [QUICKSTART.md](docs/QUICKSTART.md)
+1. **First Time?** → [QUICKSTART.md](QUICKSTART.md)
 2. **Install & Setup** → [INSTALLATION.md](INSTALLATION.md)
-3. **Project Overview** → [README.md](README.md)
+3. **Project Overview** → [../README.md](../README.md)
 4. **Project Summary** → [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md)
 
 ### 📖 Documentation
-- **API Reference** → [docs/API_REFERENCE.md](docs/API_REFERENCE.md)
-- **Architecture** → [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
-- **Project Structure** → [docs/PROJECT_STRUCTURE.md](docs/PROJECT_STRUCTURE.md)
+- **API Reference** → [API_REFERENCE.md](API_REFERENCE.md)
+- **Architecture** → [ARCHITECTURE.md](ARCHITECTURE.md)
+- **Project Structure** → [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)
 - **Security** → [SECURITY.md](SECURITY.md)
 - **Contributing** → [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Roadmap** → [ROADMAP.md](ROADMAP.md)
@@ -63,8 +63,8 @@ Welcome to GhidraInsight! This file helps you navigate the comprehensive project
 3. Deploy using `docker-compose.yml`
 
 **...understand the architecture**
-1. Read [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
-2. Review [docs/PROJECT_STRUCTURE.md](docs/PROJECT_STRUCTURE.md)
+1. Read [ARCHITECTURE.md](ARCHITECTURE.md)
+2. Review [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)
 3. Browse component READMEs
 
 **...see what's coming**
@@ -283,11 +283,11 @@ See [ROADMAP.md](ROADMAP.md) for detailed plans.
 
 ## 📚 Additional Resources
 
-- [API Documentation](docs/API_REFERENCE.md)
-- [Architecture Guide](docs/ARCHITECTURE.md)
+- [API Documentation](API_REFERENCE.md)
+- [Architecture Guide](ARCHITECTURE.md)
 - [Security Policies](SECURITY.md)
 - [Development Guide](CONTRIBUTING.md)
-- [Project Structure](docs/PROJECT_STRUCTURE.md)
+- [Project Structure](PROJECT_STRUCTURE.md)
 
 ---
 
@@ -295,14 +295,14 @@ See [ROADMAP.md](ROADMAP.md) for detailed plans.
 
 - [Project Summary](PROJECT_SUMMARY.md) - Complete project overview
 - [Installation Guide](INSTALLATION.md) - Setup instructions
-- [Quick Start](docs/QUICKSTART.md) - 5-minute start
-- [API Reference](docs/API_REFERENCE.md) - Endpoint documentation
+- [Quick Start](QUICKSTART.md) - 5-minute start
+- [API Reference](API_REFERENCE.md) - Endpoint documentation
 - [Contributing](CONTRIBUTING.md) - How to help
 
 ---
 
 **Welcome to GhidraInsight! 🔍**
 
-Start with [QUICKSTART.md](docs/QUICKSTART.md) for a fast setup or [INSTALLATION.md](INSTALLATION.md) for detailed instructions.
+Start with [QUICKSTART.md](QUICKSTART.md) for a fast setup or [INSTALLATION.md](INSTALLATION.md) for detailed instructions.
 
 **Happy analyzing!** 🚀

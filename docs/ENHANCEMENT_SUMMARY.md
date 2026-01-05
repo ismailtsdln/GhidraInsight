@@ -482,14 +482,14 @@ Docker, Kubernetes, and cloud-native architecture ready to deploy.
 ## 📞 Support Resources
 
 ### Documentation
-- [README.md](README.md) - Project overview
-- [QUICKSTART.md](docs/QUICKSTART.md) - 5-minute setup
-- [API_REFERENCE.md](docs/API_REFERENCE.md) - API documentation
+- [README.md](../README.md) - Project overview
+- [QUICKSTART.md](QUICKSTART.md) - 5-minute setup
+- [API_REFERENCE.md](API_REFERENCE.md) - API documentation
 - [SECURITY.md](SECURITY.md) - Security policies
 
 ### Development
 - [CONTRIBUTING.md](CONTRIBUTING.md) - Contribution guidelines
-- [ARCHITECTURE.md](docs/ARCHITECTURE.md) - System design
+- [ARCHITECTURE.md](ARCHITECTURE.md) - System design
 - [CODE_QUALITY_IMPROVEMENTS.md](CODE_QUALITY_IMPROVEMENTS.md) - Enhancement details
 
 ---

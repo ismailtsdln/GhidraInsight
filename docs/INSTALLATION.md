@@ -161,7 +161,7 @@ make start
 
 ### Environment Variables
 
-Create `.env` file in project root:
+Create .env file in project root:
 
 ```bash
 # Server
@@ -194,7 +194,7 @@ TELEMETRY_ENDPOINT=https://telemetry.ghidrainsight.dev
 
 ### Configuration File (YAML)
 
-`config.yaml`:
+config.yaml:
 
 ```yaml
 server:
@@ -246,7 +246,7 @@ ghidrainsight-server --config config.yaml
 python3 -c "import secrets; print(secrets.token_urlsafe(32))"
 ```
 
-Update `.env`:
+Update .env:
 ```bash
 JWT_SECRET=<generated-secret>
 ```
@@ -394,3 +394,5 @@ rm -rf ~/GhidraInsight
 ---
 
 **Successfully installed GhidraInsight? Great! Start exploring binaries.** 🔍
+
+```

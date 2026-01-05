@@ -167,11 +167,11 @@ docker-compose logs python-mcp
 
 | Document | Content | For Whom |
 |----------|---------|----------|
-| [README.md](README.md) | Overview | All Users |
+| [README.md](../README.md) | Overview | All Users |
 | [EASE_OF_USE_IMPROVEMENTS_EN.md](EASE_OF_USE_IMPROVEMENTS_EN.md) | UX Enhancements | Developers |
 | [INSTALLATION.md](INSTALLATION.md) | Installation Details | Developers |
 | [SECURITY.md](SECURITY.md) | Security Guide | DevOps |
-| [API_REFERENCE.md](docs/API_REFERENCE.md) | API Documentation | Integrators |
+| [API_REFERENCE.md](API_REFERENCE.md) | API Documentation | Integrators |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Code Contribution | Developers |
 
 ---
@@ -292,8 +292,8 @@ asyncio.run(custom_analysis("./binary.elf"))
    ```
 
 ### Intermediate Level
-- [API_REFERENCE.md](docs/API_REFERENCE.md) - REST API
-- [ARCHITECTURE.md](docs/ARCHITECTURE.md) - System design
+- [API_REFERENCE.md](API_REFERENCE.md) - REST API
+- [ARCHITECTURE.md](ARCHITECTURE.md) - System design
 - Integration guides (Claude, OpenAI, MCP)
 
 ### Advanced Level

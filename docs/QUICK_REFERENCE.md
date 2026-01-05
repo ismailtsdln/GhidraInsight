@@ -9,13 +9,13 @@
 ## 📖 Documentation Index
 
 ### Getting Started
-- **[README.md](README.md)** - Project overview and features
-- **[QUICKSTART.md](docs/QUICKSTART.md)** - 5-minute setup guide
+- **[README.md](../README.md)** - Project overview and features
+- **[QUICKSTART.md](QUICKSTART.md)** - 5-minute setup guide
 - **[INSTALLATION.md](INSTALLATION.md)** - Detailed installation instructions
 
 ### API & Integration
-- **[API_REFERENCE.md](docs/API_REFERENCE.md)** - REST, WebSocket, SSE endpoints
-- **[ARCHITECTURE.md](docs/ARCHITECTURE.md)** - System design and components
+- **[API_REFERENCE.md](API_REFERENCE.md)** - REST, WebSocket, SSE endpoints
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - System design and components
 - **Examples**:
   - [Claude Integration](examples/CLAUDE_INTEGRATION.md)
   - [ChatGPT Integration](examples/OPENAI_INTEGRATION.md)
@@ -352,9 +352,9 @@ docker stats ghidrainsight
 ## 🔗 Useful Links
 
 ### Documentation
-- [Full README](README.md)
-- [API Reference](docs/API_REFERENCE.md)
-- [Architecture Guide](docs/ARCHITECTURE.md)
+- [Full README](../README.md)
+- [API Reference](API_REFERENCE.md)
+- [Architecture Guide](ARCHITECTURE.md)
 
 ### Examples
 - [Claude Integration](examples/CLAUDE_INTEGRATION.md)

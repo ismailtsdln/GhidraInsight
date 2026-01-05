@@ -288,14 +288,14 @@ docker-compose up
 
 | Document | Purpose | When to Read |
 |----------|---------|--------------|
-| [README.md](README.md) | Project overview | First |
-| [QUICKSTART.md](docs/QUICKSTART.md) | 5-min setup | Early setup |
+| [README.md](../README.md) | Project overview | First |
+| [QUICKSTART.md](QUICKSTART.md) | 5-min setup | Early setup |
 | [INSTALLATION.md](INSTALLATION.md) | Detailed setup | For manual install |
-| [API_REFERENCE.md](docs/API_REFERENCE.md) | API usage | For integration |
+| [API_REFERENCE.md](API_REFERENCE.md) | API usage | For integration |
 | [SECURITY.md](SECURITY.md) | Security policies | Before production |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Development | For contributors |
-| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | System design | For understanding |
-| [PROJECT_STRUCTURE.md](docs/PROJECT_STRUCTURE.md) | File organization | For navigation |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | System design | For understanding |
+| [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) | File organization | For navigation |
 | [ROADMAP.md](ROADMAP.md) | Future plans | For context |
 | [INDEX.md](INDEX.md) | Quick navigation | For reference |
 
