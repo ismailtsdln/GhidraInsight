@@ -1,35 +1,27 @@
 # GhidraInsight Development Roadmap
 
-## Version 1.0 (Current) ✅
+## Version 1.1 (Q2 2026) - Current Focus
 
-### Core Features
-- ✅ Ghidra 11.x integration
-- ✅ REST API with authentication
-- ✅ Cryptographic algorithm detection
-- ✅ Taint analysis engine
-- ✅ Vulnerability detection with CVSS scoring
-- ✅ MCP server for AI integration
-- ✅ React web dashboard
-- ✅ Docker deployment
-- ✅ CI/CD pipelines
+### Enhanced Analysis
+- [ ] Control flow anomaly detection (advanced)
+- [ ] Machine learning-based vulnerability detection
+- [ ] Pattern library for known exploits
+- [ ] Semantic analysis for false positive reduction
+- [ ] Parallel analysis for speed improvement
 
-### Documentation
-- ✅ README.md with features
-- ✅ SECURITY.md with best practices
-- ✅ CONTRIBUTING.md with workflow
-- ✅ API_REFERENCE.md
-- ✅ QUICKSTART.md
-- ✅ ARCHITECTURE.md
+### Frontend Improvements
+- [ ] Function graph visualization (Cytoscape)
+- [ ] Real-time collaborative analysis
+- [ ] Export reports (PDF, HTML, JSON)
+- [ ] Binary diff viewer
+- [ ] Search and filtering across analysis results
 
-### Testing & Quality
-- ✅ CI/CD with GitHub Actions
-- ✅ Code linting (Java, Python, JS)
-- ✅ Coverage reports
-- ✅ Docker build pipeline
-
----
-
-## Version 1.1 (Q2 2026)
+### Backend Enhancements
+- [ ] Database backend (PostgreSQL)
+- [ ] Analysis caching and incremental updates
+- [ ] Distributed analysis (multi-node)
+- [ ] WebSocket streaming improvements
+- [ ] Advanced error recovery
 
 ### Enhanced Analysis
 - [ ] Control flow anomaly detection (advanced)
