@@ -1,0 +1,36 @@
+FROM ghidra/ghidra:latest
+
+# Install Java development tools
+RUN apt-get update && apt-get install -y \
+    gradle \
+    maven \
+    git \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy plugin source
+COPY ghidra-plugin ./ghidra-plugin
+
+# Build the plugin
+WORKDIR /app/ghidra-plugin
+RUN chmod +x gradlew && ./gradlew build
+
+# Set up MCP server
+WORKDIR /app
+RUN mkdir -p /app/bin /app/config
+
+# Copy built plugin to Ghidra extensions
+RUN cp ghidra-plugin/build/libs/GhidraInsight-1.0.0.jar \
+    ${GHIDRA_INSTALL_DIR}/Extensions/Ghidra/plugins/GhidraInsight.jar || true
+
+# Expose ports
+EXPOSE 8000 8001 8002
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/api/status || exit 1
+
+# Start the plugin
+CMD ["sh", "-c", "java -Xmx4g -cp /app/ghidra-plugin/build/libs/*:/ghidra/lib/* com.ghidrainsight.GhidraInsightServer"]

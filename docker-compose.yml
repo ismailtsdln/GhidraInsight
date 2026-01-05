@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  # Java Ghidra Plugin + MCP Server
+  ghidra-plugin:
+    build:
+      context: .
+      dockerfile: Dockerfile.ghidra
+    ports:
+      - "8000:8000"  # REST API
+      - "8001:8001"  # WebSocket
+      - "8002:8002"  # SSE
+    environment:
+      - JAVA_OPTS=-Xmx4g
+      - LOG_LEVEL=INFO
+      - GHIDRA_ANALYZE_TIMEOUT=300
+    volumes:
+      - ./ghidra-plugin/config:/config
+      - binaries:/binaries
+    networks:
+      - ghidrainsight
+    restart: unless-stopped
+
+  # Python MCP Server
+  python-mcp:
+    build:
+      context: ./python-mcp
+      dockerfile: Dockerfile
+    ports:
+      - "8100:8000"  # Alternative port for Python MCP
+    environment:
+      - LOG_LEVEL=INFO
+      - JWT_SECRET=${JWT_SECRET:-change-me-in-production}
+      - API_KEY=${API_KEY:-}
+      - GHIDRA_HOST=ghidra-plugin
+      - GHIDRA_PORT=8000
+    depends_on:
+      - ghidra-plugin
+    networks:
+      - ghidrainsight
+    restart: unless-stopped
+
+  # React Web Dashboard
+  web-dashboard:
+    build:
+      context: ./web-dashboard
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
+    depends_on:
+      - ghidra-plugin
+    networks:
+      - ghidrainsight
+    restart: unless-stopped
+
+volumes:
+  binaries:
+    driver: local
+
+networks:
+  ghidrainsight:
+    driver: bridge

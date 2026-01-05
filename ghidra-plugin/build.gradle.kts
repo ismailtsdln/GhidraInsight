@@ -1,0 +1,156 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.diffplug.spotless' version '6.20.0'
+    id 'com.github.spotbugs' version '5.0.14'
+    id 'checkstyle'
+    id 'jacoco'
+    id 'maven-publish'
+}
+
+group = 'com.ghidrainsight'
+version = '1.0.0'
+description = 'AI-driven Ghidra plugin with MCP server support'
+
+repositories {
+    mavenCentral()
+    // Ghidra dependencies
+    flatDir { dirs 'libs' }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+dependencies {
+    // Ghidra (requires local installation)
+    compileOnly fileTree(dir: System.getenv('GHIDRA_INSTALL_DIR') ?: '.', include: '**/*.jar')
+    
+    // Core dependencies
+    implementation 'com.google.guice:guice:5.1.0'
+    implementation 'org.slf4j:slf4j-api:2.0.7'
+    implementation 'ch.qos.logback:logback-classic:1.4.8'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.2'
+    
+    // REST API
+    implementation 'spark.core:spark-core:2.9.4'
+    implementation 'io.jsonwebtoken:jjwt:0.11.5'
+    
+    // Testing
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+    testImplementation 'org.mockito:mockito-core:5.3.1'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.3.1'
+    testImplementation 'org.assertj:assertj-core:3.24.1'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+    
+    finalizedBy jacocoTestReport
+}
+
+spotless {
+    java {
+        googleJavaFormat('1.17.0')
+    }
+}
+
+checkstyle {
+    toolVersion '10.12.0'
+    configFile = file('config/checkstyle.xml')
+}
+
+tasks.named('checkstyleMain') {
+    source = fileTree('src/main/java')
+}
+
+spotbugs {
+    effort = 'max'
+    reportLevel = 'low'
+}
+
+jacoco {
+    toolVersion = '0.8.10'
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = true
+        csv.required = false
+    }
+}
+
+tasks.register('verifyCodeCoverage') {
+    dependsOn jacocoTestReport
+    doLast {
+        def xmlReportFile = file("${buildDir}/reports/jacoco/test/jacocoTestReport.xml")
+        if (xmlReportFile.exists()) {
+            println "✓ Code coverage report generated: ${xmlReportFile}"
+        }
+    }
+}
+
+application {
+    mainClass = 'com.ghidrainsight.GhidraInsightPlugin'
+}
+
+tasks.named('jar') {
+    manifest {
+        attributes(
+            'Main-Class': application.mainClass,
+            'Implementation-Version': project.version,
+            'Implementation-Title': project.name
+        )
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            
+            pom {
+                name = 'GhidraInsight'
+                description = project.description
+                url = 'https://github.com/yourusername/GhidraInsight'
+                
+                licenses {
+                    license {
+                        name = 'Apache License 2.0'
+                        url = 'https://www.apache.org/licenses/LICENSE-2.0'
+                    }
+                }
+                
+                developers {
+                    developer {
+                        name = 'GhidraInsight Team'
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Build tasks
+tasks.named('build') {
+    dependsOn spotlessCheck, checkstyleMain, spotbugsMain, verifyCodeCoverage
+}
+
+task buildPlugin(type: Jar) {
+    from sourceSets.main.output
+    archiveBaseName = 'GhidraInsight'
+    archiveVersion = project.version
+    
+    manifest {
+        attributes(
+            'Plugin-Name': 'GhidraInsight',
+            'Plugin-Version': project.version,
+            'Plugin-Description': 'AI-driven reverse engineering assistant'
+        )
+    }
+}

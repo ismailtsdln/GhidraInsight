@@ -1,0 +1,143 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ghidrainsight"
+version = "1.0.0"
+description = "AI-driven reverse engineering platform with Ghidra and MCP support"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "GhidraInsight Team"},
+]
+keywords = ["ghidra", "reverse-engineering", "mcp", "ai", "security", "binary-analysis"]
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: Apache Software License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+]
+
+dependencies = [
+    "aiohttp>=3.8.0",
+    "websockets>=11.0",
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+    "pyjwt>=2.8.0",
+    "pycryptodome>=3.17.0",
+    "python-dotenv>=1.0.0",
+    "loguru>=0.7.0",
+    "click>=8.1.0",
+    "httpx>=0.24.0",
+    "tenacity>=8.2.0",
+    "typing-extensions>=4.7.0",
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.7.0",
+    "flake8>=6.0.0",
+    "mypy>=1.4.0",
+    "bandit>=1.7.5",
+    "isort>=5.12.0",
+]
+
+docs = [
+    "sphinx>=7.0.0",
+    "sphinx-rtd-theme>=1.3.0",
+    "myst-parser>=2.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/GhidraInsight"
+Documentation = "https://ghidrainsight.dev"
+Repository = "https://github.com/yourusername/GhidraInsight"
+"Bug Tracker" = "https://github.com/yourusername/GhidraInsight/issues"
+
+[project.scripts]
+ghidrainsight = "ghidrainsight.cli:main"
+ghidrainsight-server = "ghidrainsight.mcp.server:main"
+ghidrainsight-analyze = "ghidrainsight.cli.analyze:main"
+
+[tool.black]
+line-length = 100
+target-version = ["py39", "py310", "py311", "py312"]
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+skip_gitignore = true
+multi_line_mode = 3
+include_trailing_comma = true
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = [
+    "-v",
+    "--cov=ghidrainsight",
+    "--cov-report=html",
+    "--cov-report=term-missing",
+    "--strict-markers",
+]
+markers = [
+    "asyncio: marks tests as async",
+    "integration: marks tests as integration tests",
+    "slow: marks tests as slow",
+]
+
+[tool.coverage.run]
+branch = true
+omit = [
+    "*/tests/*",
+    "*/test_*.py",
+    "*/__main__.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]

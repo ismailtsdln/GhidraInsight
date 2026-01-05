@@ -1,0 +1,132 @@
+# Build outputs
+build/
+dist/
+*.jar
+*.war
+*.class
+target/
+out/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+*.iml
+.sublime-project
+.sublime-workspace
+.project
+.classpath
+.c9/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+.venv/
+venv/
+env/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.tox/
+.hypothesis/
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+site/
+*.so
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn-lock.json
+dist/
+build/
+.npm
+.eslintcache
+.node_repl_history
+*.tsbuildinfo
+
+# Gradle
+.gradle/
+build/
+gradle-app.setting
+gradlew
+gradlew.bat
+gradle.properties
+
+# Maven
+pom.xml.tag
+pom.xml.releaseBackup
+release.properties
+.mvn/
+
+# Environment
+.env
+.env.local
+.env.*.local
+.envrc
+.direnv/
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE Cache
+.cache/
+.vscode-server/
+.vscode-remote/
+
+# Build artifacts
+*.o
+*.a
+*.so.1
+*.dylib
+*.dll
+*.exe
+
+# Generated files
+*.generated
+*.pb.go
+*.pb.py
+*.pb.java
+
+# Testing
+coverage/
+.nyc_output/
+test-results/
+**/test-output/
+
+# Caches
+.cache/
+.eslintcache
+.stylelintcache
