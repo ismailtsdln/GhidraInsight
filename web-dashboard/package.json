@@ -22,7 +22,7 @@
     "@heroicons/react": "^2.0.18",
     "classnames": "^2.3.2",
     "highlight.js": "^11.8.0",
-    "react-syntax-highlighter": "^15.5.0",
+    "react-syntax-highlighter": "^16.1.0",
     "cytoscape": "^3.28.1"
   },
   "devDependencies": {
@@ -36,7 +36,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^3.0.0",
     "typescript": "^5.1.6",
-    "vite": "^4.3.9",
+    "vite": "^5.4.21",
     "vitest": "^0.34.1",
     "@vitest/ui": "^0.34.1",
     "@testing-library/react": "^14.0.0",
