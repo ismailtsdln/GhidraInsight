@@ -403,7 +403,7 @@ Before deploying to production:
 ## Questions?
 
 For security-related questions (non-vulnerability):
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/GhidraInsight/discussions)
+- **Discussions**: [GitHub Discussions](https://github.com/ismailtsdln/GhidraInsight/discussions)
 - **Email**: support@ghidrainsight.dev
 
 ---

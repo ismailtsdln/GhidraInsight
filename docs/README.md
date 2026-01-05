@@ -41,7 +41,7 @@ Welcome to the GhidraInsight documentation! This directory contains all the comp
 ## 🔗 Quick Links
 
 - [Project Index](INDEX.md) - Comprehensive navigation guide
-- [GitHub Repository](https://github.com/yourusername/GhidraInsight)
+- [GitHub Repository](https://github.com/ismailtsdln/GhidraInsight)
 - [Examples Directory](../examples/) - Integration examples
 - [Web Dashboard](../web-dashboard/) - Frontend application
 
@@ -49,8 +49,8 @@ Welcome to the GhidraInsight documentation! This directory contains all the comp
 
 For questions, issues, or contributions:
 - 📧 Email: support@ghidrainsight.dev
-- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/GhidraInsight/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/yourusername/GhidraInsight/discussions)
+- 🐛 Issues: [GitHub Issues](https://github.com/ismailtsdln/GhidraInsight/issues)
+- 💬 Discussions: [GitHub Discussions](https://github.com/ismailtsdln/GhidraInsight/discussions)
 
 ---
 

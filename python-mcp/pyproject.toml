@@ -65,10 +65,10 @@ docs = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/GhidraInsight"
+Homepage = "https://github.com/ismailtsdln/GhidraInsight"
 Documentation = "https://ghidrainsight.dev"
-Repository = "https://github.com/yourusername/GhidraInsight"
-"Bug Tracker" = "https://github.com/yourusername/GhidraInsight/issues"
+Repository = "https://github.com/ismailtsdln/GhidraInsight"
+"Bug Tracker" = "https://github.com/ismailtsdln/GhidraInsight/issues"
 
 [project.scripts]
 ghidrainsight = "ghidrainsight.cli:main"

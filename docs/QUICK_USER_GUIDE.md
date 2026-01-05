@@ -10,7 +10,7 @@
 
 ### Option 1: Docker (En Kolay) ⭐
 ```bash
-git clone https://github.com/yourusername/GhidraInsight.git
+git clone https://github.com/ismailtsdln/GhidraInsight.git
 cd GhidraInsight
 docker-compose up -d && open http://localhost:3000
 ```
@@ -316,8 +316,8 @@ ghidrainsight update check
 ```
 
 ### İletişim Kanalları
-- 💬 [Discussions](https://github.com/yourusername/GhidraInsight/discussions)
-- 🐛 [Issues](https://github.com/yourusername/GhidraInsight/issues)
+- 💬 [Discussions](https://github.com/ismailtsdln/GhidraInsight/discussions)
+- 🐛 [Issues](https://github.com/ismailtsdln/GhidraInsight/issues)
 - 📧 Email: support@ghidrainsight.dev
 
 ---

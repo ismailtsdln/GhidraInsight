@@ -15,7 +15,7 @@
 
 ### Option 1: Docker (Recommended)
 ```bash
-git clone https://github.com/yourusername/GhidraInsight.git
+git clone https://github.com/ismailtsdln/GhidraInsight.git
 cd GhidraInsight
 docker-compose up -d
 open http://localhost:3000  # Dashboard opens automatically
@@ -127,7 +127,7 @@ Requires: Java 11+, Python 3.9+, Node.js 18+, Ghidra 11+
 
 ```bash
 # 1. Clone and navigate
-git clone https://github.com/yourusername/GhidraInsight.git
+git clone https://github.com/ismailtsdln/GhidraInsight.git
 cd GhidraInsight
 
 # 2. Start all services (one command!)
@@ -693,7 +693,7 @@ If GhidraInsight is helpful, please:
 
 **Made with ❤️ for the reverse engineering community**
 
-[Star ⭐](https://github.com/yourusername/GhidraInsight) · [Report Bug 🐛](https://github.com/yourusername/GhidraInsight/issues) · [Request Feature 💡](https://github.com/yourusername/GhidraInsight/discussions)
+[Star ⭐](https://github.com/ismailtsdln/GhidraInsight) · [Report Bug 🐛](https://github.com/ismailtsdln/GhidraInsight/issues) · [Request Feature 💡](https://github.com/ismailtsdln/GhidraInsight/discussions)
 
 </div>
 

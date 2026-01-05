@@ -361,9 +361,9 @@ docker stats ghidrainsight
 - [ChatGPT Integration](examples/OPENAI_INTEGRATION.md)
 
 ### Resources
-- [GitHub Repository](https://github.com/yourusername/GhidraInsight)
-- [Issue Tracker](https://github.com/yourusername/GhidraInsight/issues)
-- [Discussions](https://github.com/yourusername/GhidraInsight/discussions)
+- [GitHub Repository](https://github.com/ismailtsdln/GhidraInsight)
+- [Issue Tracker](https://github.com/ismailtsdln/GhidraInsight/issues)
+- [Discussions](https://github.com/ismailtsdln/GhidraInsight/discussions)
 
 ---
 

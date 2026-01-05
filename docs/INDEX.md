@@ -124,7 +124,7 @@ Main Components:
 ### Setting Up
 ```bash
 # Clone
-git clone https://github.com/yourusername/GhidraInsight.git
+git clone https://github.com/ismailtsdln/GhidraInsight.git
 
 # Setup
 ./scripts/setup.sh
@@ -220,8 +220,8 @@ Infrastructure ready for Kubernetes deployment.
 
 | Resource | Link |
 |----------|------|
-| **Issues** | https://github.com/yourusername/GhidraInsight/issues |
-| **Discussions** | https://github.com/yourusername/GhidraInsight/discussions |
+| **Issues** | https://github.com/ismailtsdln/GhidraInsight/issues |
+| **Discussions** | https://github.com/ismailtsdln/GhidraInsight/discussions |
 | **Email** | support@ghidrainsight.dev |
 | **Security** | security@ghidrainsight.dev |
 

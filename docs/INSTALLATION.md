@@ -38,7 +38,7 @@
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/GhidraInsight.git
+git clone https://github.com/ismailtsdln/GhidraInsight.git
 cd GhidraInsight
 
 # Start services
@@ -139,7 +139,7 @@ npm run build
 
 ```bash
 # Clone with development dependencies
-git clone --depth 1 https://github.com/yourusername/GhidraInsight.git
+git clone --depth 1 https://github.com/ismailtsdln/GhidraInsight.git
 cd GhidraInsight
 
 # Install all development tools
@@ -386,8 +386,8 @@ rm -rf ~/GhidraInsight
 
 ## Getting Help
 
-- **Issues**: https://github.com/yourusername/GhidraInsight/issues
-- **Discussions**: https://github.com/yourusername/GhidraInsight/discussions
+- **Issues**: https://github.com/ismailtsdln/GhidraInsight/issues
+- **Discussions**: https://github.com/ismailtsdln/GhidraInsight/discussions
 - **Email**: support@ghidrainsight.dev
 - **Slack**: ghidrainsight.slack.com
 
