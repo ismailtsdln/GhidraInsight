@@ -1,0 +1,145 @@
+{{- if .Values.ghidraPlugin.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ghidrainsight.fullname" . }}-ghidra-plugin
+  labels:
+    {{- include "ghidrainsight.labels" . | nindent 4 }}
+    component: ghidra-plugin
+spec:
+  replicas: {{ .Values.ghidraPlugin.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "ghidrainsight.selectorLabels" . | nindent 6 }}
+      component: ghidra-plugin
+  template:
+    metadata:
+      labels:
+        {{- include "ghidrainsight.selectorLabels" . | nindent 8 }}
+        component: ghidra-plugin
+    spec:
+      containers:
+      - name: ghidra-plugin
+        image: "{{ .Values.ghidraPlugin.image.repository }}:{{ .Values.ghidraPlugin.image.tag }}"
+        env:
+        - name: JAVA_OPTS
+          value: {{ .Values.ghidraPlugin.javaOpts | quote }}
+        - name: LOG_LEVEL
+          value: {{ .Values.config.logLevel | quote }}
+        ports:
+        - containerPort: 8000
+          name: http
+        resources:
+          {{- toYaml .Values.ghidraPlugin.resources | nindent 10 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "ghidrainsight.fullname" . }}-ghidra-plugin
+  labels:
+    {{- include "ghidrainsight.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: 8000
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "ghidrainsight.selectorLabels" . | nindent 4 }}
+    component: ghidra-plugin
+{{- end }}
+
+{{- if .Values.pythonMcp.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ghidrainsight.fullname" . }}-python-mcp
+  labels:
+    {{- include "ghidrainsight.labels" . | nindent 4 }}
+    component: python-mcp
+spec:
+  replicas: {{ .Values.pythonMcp.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "ghidrainsight.selectorLabels" . | nindent 6 }}
+      component: python-mcp
+  template:
+    metadata:
+      labels:
+        {{- include "ghidrainsight.selectorLabels" . | nindent 8 }}
+        component: python-mcp
+    spec:
+      containers:
+      - name: python-mcp
+        image: "{{ .Values.pythonMcp.image.repository }}:{{ .Values.pythonMcp.image.tag }}"
+        ports:
+        - containerPort: 8000
+          name: http
+        resources:
+          {{- toYaml .Values.pythonMcp.resources | nindent 10 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "ghidrainsight.fullname" . }}-python-mcp
+  labels:
+    {{- include "ghidrainsight.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: 8000
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "ghidrainsight.selectorLabels" . | nindent 4 }}
+    component: python-mcp
+{{- end }}
+
+{{- if .Values.webDashboard.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ghidrainsight.fullname" . }}-web-dashboard
+  labels:
+    {{- include "ghidrainsight.labels" . | nindent 4 }}
+    component: web-dashboard
+spec:
+  replicas: {{ .Values.webDashboard.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "ghidrainsight.selectorLabels" . | nindent 6 }}
+      component: web-dashboard
+  template:
+    metadata:
+      labels:
+        {{- include "ghidrainsight.selectorLabels" . | nindent 8 }}
+        component: web-dashboard
+    spec:
+      containers:
+      - name: web-dashboard
+        image: "{{ .Values.webDashboard.image.repository }}:{{ .Values.webDashboard.image.tag }}"
+        ports:
+        - containerPort: 3000
+          name: http
+        resources:
+          {{- toYaml .Values.webDashboard.resources | nindent 10 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "ghidrainsight.fullname" . }}-web-dashboard
+  labels:
+    {{- include "ghidrainsight.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: 3000
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "ghidrainsight.selectorLabels" . | nindent 4 }}
+    component: web-dashboard
+{{- end }}

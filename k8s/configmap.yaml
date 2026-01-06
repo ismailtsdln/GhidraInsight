@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ghidrainsight-config
+  namespace: ghidrainsight
+data:
+  LOG_LEVEL: "INFO"
+  GHIDRA_ANALYZE_TIMEOUT: "300"
+  DATABASE_URL: "postgresql://ghidrauser:changeme@postgres:5432/ghidrainsight"
+  JWT_SECRET: "change-me-in-production"
+  API_KEY: ""

@@ -1,0 +1,91 @@
+# Default values for ghidrainsight
+replicaCount: 2
+
+image:
+  repository: ghidrainsight
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+ghidraPlugin:
+  enabled: true
+  replicaCount: 2
+  image:
+    repository: ghidrainsight/ghidra-plugin
+    tag: "latest"
+  resources:
+    requests:
+      memory: "4Gi"
+      cpu: "2"
+    limits:
+      memory: "8Gi"
+      cpu: "4"
+  javaOpts: "-Xmx4g"
+
+pythonMcp:
+  enabled: true
+  replicaCount: 2
+  image:
+    repository: ghidrainsight/python-mcp
+    tag: "latest"
+  resources:
+    requests:
+      memory: "2Gi"
+      cpu: "1"
+    limits:
+      memory: "4Gi"
+      cpu: "2"
+
+webDashboard:
+  enabled: true
+  replicaCount: 2
+  image:
+    repository: ghidrainsight/web-dashboard
+    tag: "latest"
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "0.5"
+    limits:
+      memory: "1Gi"
+      cpu: "1"
+
+postgresql:
+  enabled: true
+  image:
+    repository: postgres
+    tag: "15-alpine"
+  persistence:
+    enabled: true
+    size: 20Gi
+  resources:
+    requests:
+      memory: "1Gi"
+      cpu: "0.5"
+    limits:
+      memory: "2Gi"
+      cpu: "1"
+
+config:
+  logLevel: "INFO"
+  ghidraAnalyzeTimeout: "300"
+  jwtSecret: "change-me-in-production"
+  apiKey: ""
+
+ingress:
+  enabled: false
+  className: "nginx"
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  hosts:
+    - host: ghidrainsight.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: ghidrainsight-tls
+      hosts:
+        - ghidrainsight.example.com
+
+service:
+  type: ClusterIP
+  port: 3000

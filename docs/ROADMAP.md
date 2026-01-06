@@ -29,23 +29,23 @@
 
 ### LLM Integration
 - [x] Fine-tuned model for binary analysis
-- [ ] Multi-LLM support (Claude, GPT-4, Gemini)
-- [ ] Context optimization for cheaper inference
-- [ ] Function name generation from IL
-- [ ] Automatic comment generation
+- [x] Multi-LLM support (Claude, GPT-4, Gemini)
+- [x] Context optimization for cheaper inference
+- [x] Function name generation from IL
+- [x] Automatic comment generation
 
 ### Plugins & Extensions
 - [ ] Third-party plugin marketplace
-- [ ] Plugin development SDK/framework
-- [ ] Custom analysis module templates
+- [x] Plugin development SDK/framework
+- [x] Custom analysis module templates
 - [ ] Community-contributed analyzers
 
 ### DevOps
-- [ ] Kubernetes manifests
-- [ ] Helm charts
-- [ ] Cloud deployment guides (AWS, GCP, Azure)
+- [x] Kubernetes manifests
+- [x] Helm charts
+- [x] Cloud deployment guides (AWS, GCP, Azure)
 - [ ] Multi-region support
-- [ ] Backup & disaster recovery
+- [x] Backup & disaster recovery
 
 ---
 

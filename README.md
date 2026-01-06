@@ -44,8 +44,11 @@ ghidrainsight analyze --file binary.elf --ai-powered
 - **Symbol Recovery**: Function name inference and type reconstruction
 
 ### 🤖 AI-Powered Analysis
-- **LLM Integration**: Function name generation, automatic comments, vulnerability explanations
-- **ChatGPT/Claude Integration**: Ask natural language questions about binaries
+- **Multi-LLM Support**: Claude, GPT-4, Gemini, and more - choose the best model for your needs
+- **Context Optimization**: Automatic context truncation for cheaper inference costs
+- **Function Name Generation**: AI-powered function name generation from disassembly/pseudocode
+- **Automatic Comments**: Intelligent comment generation for better code understanding
+- **Vulnerability Explanations**: Natural language explanations of detected vulnerabilities
 - **Automated Vulnerability Scanning**: CVSS scores with AI-powered remediation
 - **Pattern Recognition**: ML-based anomaly and weakness detection
 - **Intelligent Code Summarization**: Automatic function and module descriptions
@@ -54,7 +57,7 @@ ghidrainsight analyze --file binary.elf --ai-powered
 - **Web Dashboard**: Intuitive React UI with real-time analysis
 - **Python SDK**: Programmatic access with async support
 - **CLI Tools**: Command-line interface for automation
-- **MCP Protocol**: Seamless LLM integration (Claude, ChatGPT)
+- **MCP Protocol**: Seamless LLM integration (Claude, GPT-4, Gemini, and more)
 - **REST API**: RESTful endpoints for custom integrations
 - **🦙 Local AI**: Ollama and other local models support (NEW)
 
@@ -331,27 +334,45 @@ ghidrainsight config list
 
 ---
 
-### 4. LLM Integration (ChatGPT / Claude)
+### 4. LLM Integration (Multi-Provider Support)
 
 **Perfect for**: AI assistants, automated security reviews
 
-#### With Claude Desktop
-```bash
-# Configure Claude to use GhidraInsight
-ghidrainsight integrate --provider claude --api-key $ANTHROPIC_API_KEY
+GhidraInsight supports multiple LLM providers with automatic context optimization:
 
-# Binary analysis now available in Claude Desktop
+#### Claude (Anthropic)
+```bash
+# Setup Claude integration
+export ANTHROPIC_API_KEY=your-key-here
+ghidrainsight integrate --provider anthropic --api-key $ANTHROPIC_API_KEY
+
+# Use Claude for analysis
+ghidrainsight analyze --file binary.elf --ai-provider anthropic --ai-model claude-3-haiku
 ```
 
-#### With ChatGPT / OpenAI
+#### OpenAI (GPT-4, GPT-3.5)
 ```bash
 # Setup OpenAI integration
+export OPENAI_API_KEY=your-key-here
 ghidrainsight integrate --provider openai --api-key $OPENAI_API_KEY
 
-# Now you can upload binaries in ChatGPT for analysis
+# Use GPT-4 for analysis
+ghidrainsight analyze --file binary.elf --ai-provider openai --ai-model gpt-4
 ```
 
-See [examples/CLAUDE_INTEGRATION.md](examples/CLAUDE_INTEGRATION.md) and [examples/OPENAI_INTEGRATION.md](examples/OPENAI_INTEGRATION.md) for detailed setup.
+#### Google Gemini
+```bash
+# Setup Google Gemini integration
+export GOOGLE_API_KEY=your-key-here
+ghidrainsight integrate --provider google --api-key $GOOGLE_API_KEY
+
+# Use Gemini for analysis
+ghidrainsight analyze --file binary.elf --ai-provider google --ai-model gemini-pro
+```
+
+**Context Optimization**: Automatically enabled to reduce token usage and costs. Long contexts are intelligently truncated while preserving key information.
+
+See [examples/CLAUDE_INTEGRATION.md](examples/CLAUDE_INTEGRATION.md), [examples/OPENAI_INTEGRATION.md](examples/OPENAI_INTEGRATION.md), and [docs/AI_INTEGRATIONS.md](docs/AI_INTEGRATIONS.md) for detailed setup.
 
 ---
 
@@ -612,6 +633,10 @@ npm install && npm start
 - ✅ Web dashboard
 - ✅ MCP integration
 - ✅ Docker support
+- ✅ Multi-LLM support (Claude, GPT-4, Gemini)
+- ✅ Context optimization for cost reduction
+- ✅ Function name generation from IL
+- ✅ Automatic comment generation
 
 ### v1.1 (Q1 2026)
 - 🔄 Advanced ML models for pattern detection
@@ -661,7 +686,7 @@ If GhidraInsight is helpful, please:
 | API Endpoints | 20+ |
 | Test Coverage | 80%+ |
 | Supported Formats | ELF, PE, Mach-O |
-| LLM Integrations | Claude, ChatGPT, OpenAI |
+| LLM Integrations | Claude, GPT-4, Gemini, OpenAI (with context optimization) |
 
 ---
 

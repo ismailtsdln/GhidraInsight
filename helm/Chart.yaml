@@ -1,0 +1,17 @@
+apiVersion: v2
+name: ghidrainsight
+description: AI-driven reverse engineering platform with Ghidra and MCP support
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+keywords:
+  - reverse-engineering
+  - binary-analysis
+  - security
+  - ghidra
+  - ai
+maintainers:
+  - name: GhidraInsight Team
+    email: support@ghidrainsight.dev
+sources:
+  - https://github.com/ismailtsdln/GhidraInsight
