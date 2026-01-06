@@ -31,16 +31,17 @@ class LoggingConfig(BaseModel):
 class SecurityConfig(BaseModel):
     """Security configuration."""
 
-    jwt_secret: str = Field(min_length=32)
+    jwt_secret: str = "change-me-in-production-32-chars-min!!"
     jwt_algorithm: str = "HS256"
     jwt_expiry: int = 3600  # 1 hour
-    api_key_enabled: bool = True
-    rate_limit: int = 60  # requests per minute
+    rate_limit: int = 100  # requests per minute
     cors_origins: List[str] = ["http://localhost:3000", "http://localhost:5173"]
     allowed_hosts: List[str] = ["localhost", "127.0.0.1"]
     tls_enabled: bool = False
     tls_cert_path: Optional[str] = None
     tls_key_path: Optional[str] = None
+    api_key_enabled: bool = True
+    api_key: Optional[str] = None  # Optional API key for authentication
 
     @field_validator("jwt_algorithm")
     @classmethod

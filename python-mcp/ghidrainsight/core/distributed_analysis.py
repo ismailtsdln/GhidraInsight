@@ -15,7 +15,6 @@ except ImportError:
     AsyncResult = None
 
 from ..config import settings
-from .analysis import analysis_engine
 
 logger = logging.getLogger(__name__)
 
@@ -64,25 +63,25 @@ class DistributedAnalysisManager:
             task_default_routing_key='analysis',
         )
 
-    async def analyze_distributed(self, binary_data: bytes, features: List[str],
-                                num_chunks: int = 4) -> Dict[str, Any]:
+    async def analyze_distributed_chunks(self, binary_data: bytes, features: List[str]) -> Dict[str, Any]:
         """
-        Perform distributed analysis by splitting binary into chunks.
-
+        Analyze binary in distributed chunks.
+        
         Args:
             binary_data: Binary file content
             features: List of analysis features
-            num_chunks: Number of chunks to split into
-
+            
         Returns:
             Combined analysis results
         """
-        if not self.celery_app or not CELERY_AVAILABLE:
+        if not CELERY_AVAILABLE:
             logger.warning("Distributed analysis not available, falling back to local analysis")
-            return await analysis_engine.analyze_binary(binary_data, features)
+            from .real_analysis import real_analysis_engine
+            return real_analysis_engine.analyze_binary(binary_data, features)
 
         try:
             # Split binary into chunks
+            num_chunks = 4
             chunk_size = len(binary_data) // num_chunks
             chunks = []
 
@@ -121,7 +120,8 @@ class DistributedAnalysisManager:
         except Exception as e:
             logger.error(f"Distributed analysis failed: {e}")
             # Fallback to local analysis
-            return await analysis_engine.analyze_binary(binary_data, features)
+            from .real_analysis import real_analysis_engine
+            return real_analysis_engine.analyze_binary(binary_data, features)
 
     async def analyze_parallel_features(self, binary_data: bytes,
                                       features: List[str]) -> Dict[str, Any]:

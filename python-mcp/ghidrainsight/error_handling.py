@@ -108,7 +108,6 @@ class ErrorHandler:
             "type": error_type,
             "message": error_msg,
             "timestamp": datetime.utcnow().isoformat(),
-            "context": context or {},
             "count": self.error_counts[error_type]
         }
         
@@ -120,18 +119,40 @@ class ErrorHandler:
                 "error_context": error.context
             })
         
-        # Log based on severity
-        if isinstance(error, GhidraInsightError):
-            if error.severity == ErrorSeverity.CRITICAL:
-                self.logger.critical(f"Critical error: {error_msg}", exc_info=True, extra=error_info)
-            elif error.severity == ErrorSeverity.HIGH:
-                self.logger.error(f"High severity error: {error_msg}", exc_info=True, extra=error_info)
-            elif error.severity == ErrorSeverity.MEDIUM:
-                self.logger.warning(f"Medium severity error: {error_msg}", extra=error_info)
-            else:
-                self.logger.info(f"Low severity error: {error_msg}", extra=error_info)
+        return error_info
+    
+    def _store_error(self, error_info: Dict[str, Any]) -> None:
+        pass
+    
+    def handle_error(self, error: Exception, context: Dict[str, Any] = None):
+        """
+        Handle an error with context information.
+        
+        Args:
+            error: The exception to handle
+            context: Additional context information
+        """
+        error_info = self._classify_error(error)
+        
+        if context:
+            # Remove 'message' key to avoid LogRecord conflict
+            safe_context = {k: v for k, v in context.items() if k != 'message'}
+            error_info.update(safe_context)
+        
+        error_msg = f"{error_info['error_type']}: {error_info['message']}"
+        
+        # Log with appropriate level
+        if error_info['severity'] == ErrorSeverity.CRITICAL:
+            self.logger.critical(error_msg, exc_info=True, extra=error_info)
+        elif error_info['severity'] == ErrorSeverity.HIGH:
+            self.logger.error(error_msg, exc_info=True, extra=error_info)
+        elif error_info['severity'] == ErrorSeverity.MEDIUM:
+            self.logger.warning(error_msg, exc_info=True, extra=error_info)
         else:
-            self.logger.error(f"Unhandled exception: {error_msg}", exc_info=True, extra=error_info)
+            self.logger.info(error_msg, exc_info=True, extra=error_info)
+        
+        # Store error for metrics
+        self._store_error(error_info)
         
         return error_info
     
