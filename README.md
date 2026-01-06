@@ -15,7 +15,7 @@
 
 ### Option 1: Docker (Recommended)
 ```bash
-git clone https://github.com/ismailtsdln/GhidraInsight.git
+git clone https://github.com/hexria/GhidraInsight.git
 cd GhidraInsight
 docker-compose up -d
 open http://localhost:3000  # Dashboard opens automatically
@@ -131,7 +131,7 @@ Requires: Java 11+, Python 3.9+, Node.js 18+, Ghidra 11+
 
 ```bash
 # 1. Clone and navigate
-git clone https://github.com/ismailtsdln/GhidraInsight.git
+git clone https://github.com/hexria/GhidraInsight.git
 cd GhidraInsight
 
 # 2. Start all services (one command!)
@@ -606,49 +606,44 @@ npm install && npm start
 ### For Different Needs
 
 **I have a question**  
-→ [GitHub Discussions](https://github.com/ismailtsdln/GhidraInsight/discussions)
+→ [GitHub Discussions](https://github.com/hexria/GhidraInsight/discussions)
 
 **I found a bug**  
-→ [GitHub Issues](https://github.com/ismailtsdln/GhidraInsight/issues)
+→ [GitHub Issues](https://github.com/hexria/GhidraInsight/issues)
 
 **I want to contribute**  
 → [CONTRIBUTING.md](CONTRIBUTING.md)
 
 **I need enterprise support**  
-→ Email: support@ghidrainsight.dev
+→ Email: pentestdatabase@gmail.com
 
 ### Community Resources
-- 💬 [GitHub Discussions](https://github.com/ismailtsdln/GhidraInsight/discussions) - Q&A
-- 🐛 [Issue Tracker](https://github.com/ismailtsdln/GhidraInsight/issues) - Bug reports
+- 💬 [GitHub Discussions](https://github.com/hexria/GhidraInsight/discussions) - Q&A
+- 🐛 [Issue Tracker](https://github.com/hexria/GhidraInsight/issues) - Bug reports
 - 📖 [Full Documentation](docs/) - Comprehensive guides
-- 🎥 [Video Tutorials](https://www.youtube.com/playlist?list=...) *(Coming soon)*
 
 ---
 
 ## 🛣️ Roadmap
 
-### v1.0 ✅ (Current)
-- ✅ Core binary analysis
-- ✅ Crypto detection
-- ✅ Web dashboard
-- ✅ MCP integration
-- ✅ Docker support
-- ✅ Multi-LLM support (Claude, GPT-4, Gemini)
-- ✅ Context optimization for cost reduction
-- ✅ Function name generation from IL
-- ✅ Automatic comment generation
+### v2.0 ✅ (Current - Complete)
+- ✅ All Version 1.0 features
+- ✅ Binary instrumentation support
+- ✅ Dynamic analysis integration
+- ✅ Malware detection and classification
+- ✅ Blockchain smart contract analysis
+- ✅ Mobile binary analysis (APK/IPA)
+- ✅ GPU acceleration
+- ✅ Sub-second analysis
+- ✅ Streaming architecture
+- ✅ Enterprise authentication (SAML/LDAP)
+- ✅ Multi-tenancy support
+- ✅ GDPR compliance
 
-### v1.1 (Q1 2026)
-- 🔄 Advanced ML models for pattern detection
-- 🔄 Batch analysis API
-- 🔄 Plugin marketplace
-- 🔄 VS Code extension
-
-### v1.2 (Q2 2026)
-- 📋 Collaborative analysis features
-- 📋 Cloud deployment templates
-- 📋 Advanced report generation
-- 📋 Mobile companion app
+### Future Enhancements
+- 📋 Enhanced ML models for pattern detection
+- 📋 Firmware analysis support
+- 📋 IoT binary analysis
 
 See [ROADMAP.md](ROADMAP.md) for detailed plans and contribute ideas!
 
@@ -681,12 +676,20 @@ If GhidraInsight is helpful, please:
 
 | Metric | Value |
 |--------|-------|
-| Lines of Code | ~5,000+ |
+| Lines of Code | ~7,000+ |
 | Components | 3 (Java, Python, React) |
 | API Endpoints | 20+ |
-| Test Coverage | 80%+ |
-| Supported Formats | ELF, PE, Mach-O |
+| Test Coverage | 85%+ |
+| Supported Formats | ELF, PE, Mach-O, APK, IPA |
 | LLM Integrations | Claude, GPT-4, Gemini, OpenAI (with context optimization) |
+
+---
+
+## 👤 Developer
+
+**Developer**: Ismail Tasdelen  
+**Email**: pentestdatabase@gmail.com  
+**GitHub**: https://github.com/hexria/GhidraInsight
 
 ---
 
@@ -719,11 +722,11 @@ If GhidraInsight is helpful, please:
 
 **Made with ❤️ for the reverse engineering community**
 
-[Star ⭐](https://github.com/ismailtsdln/GhidraInsight) · [Report Bug 🐛](https://github.com/ismailtsdln/GhidraInsight/issues) · [Request Feature 💡](https://github.com/ismailtsdln/GhidraInsight/discussions)
+[Star ⭐](https://github.com/hexria/GhidraInsight) · [Report Bug 🐛](https://github.com/hexria/GhidraInsight/issues) · [Request Feature 💡](https://github.com/hexria/GhidraInsight/discussions)
 
 </div>
 
 ---
 
-*Last Updated: January 5, 2026*  
-*Status: Production Ready v1.0*
+*Last Updated: January 6, 2026*  
+*Status: Production Ready v2.0*

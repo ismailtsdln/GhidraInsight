@@ -1,12 +1,18 @@
-"""Analysis module with parallel processing support."""
+"""Enhanced analysis module with comprehensive error handling and security."""
 
 import asyncio
 import hashlib
 from concurrent.futures import ThreadPoolExecutor
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 import logging
 
 from ..config import settings
+from ..security import SecurityValidator, InputValidator
+from ..error_handling import (
+    AnalysisError, ValidationError, SecurityError,
+    safe_execute, retry_on_failure, validate_inputs,
+    global_error_handler
+)
 from .exploit_patterns import exploit_pattern_library
 from .distributed_analysis import distributed_manager
 from .error_recovery import error_recovery_manager
@@ -16,16 +22,35 @@ logger = logging.getLogger(__name__)
 
 
 class AnalysisEngine:
-    """Analysis engine with parallel processing capabilities."""
+    """Analysis engine with parallel processing capabilities and comprehensive security."""
 
-    def __init__(self):
-        self.executor = ThreadPoolExecutor(max_workers=4)
+    def __init__(self, max_workers: int = 4):
+        """
+        Initialize analysis engine.
+        
+        Args:
+            max_workers: Maximum number of worker threads
+        """
+        if max_workers < 1 or max_workers > 16:
+            raise ValidationError("max_workers must be between 1 and 16")
+        
+        self.executor = ThreadPoolExecutor(max_workers=max_workers)
         self.llm_integration = LLMIntegration(settings)
+        self.security_validator = SecurityValidator()
+        self.input_validator = InputValidator()
+        
+        logger.info(f"AnalysisEngine initialized with {max_workers} workers")
 
+    @validate_inputs(
+        binary_data=lambda x: isinstance(x, bytes) and len(x) > 0,
+        features=lambda x: isinstance(x, list) and len(x) > 0,
+        use_distributed=lambda x: isinstance(x, bool)
+    )
+    @retry_on_failure(max_retries=2, delay=1.0)
     async def analyze_binary(self, binary_data: bytes, features: List[str],
                            use_distributed: bool = False) -> Dict[str, Any]:
         """
-        Analyze binary with parallel processing or distributed processing and error recovery.
+        Analyze binary with comprehensive security validation and error handling.
 
         Args:
             binary_data: Binary file content
@@ -33,25 +58,74 @@ class AnalysisEngine:
             use_distributed: Whether to use distributed analysis
 
         Returns:
-            Analysis results
+            Analysis results with security metadata
+            
+        Raises:
+            ValidationError: If input validation fails
+            SecurityError: If security checks fail
+            AnalysisError: If analysis fails
         """
+        # Security validation
+        if not self.security_validator.validate_binary_size(binary_data):
+            raise ValidationError("Binary data too large (max 1GB for malware analysis)")
+        
+        # File type detection for analysis context
+        file_type = self.security_validator.detect_file_type(binary_data)
+        if file_type:
+            logger.info(f"Detected file type: {file_type}")
+        else:
+            logger.info("Unknown file type - proceeding with analysis")
+        
+        malware_indicators = self.security_validator.contains_malware_indicators(binary_data)
+        if malware_indicators:
+            logger.info(f"Malware indicators detected: {malware_indicators}")
+        
+        # Feature validation
+        if not self.input_validator.validate_feature_list(features):
+            raise ValidationError(f"Invalid features: {features}")
+        
         async def _analysis_operation():
-            if use_distributed:
-                return await distributed_manager.analyze_distributed(binary_data, features)
-            else:
-                return await self._analyze_parallel(binary_data, features)
+            try:
+                if use_distributed:
+                    return await distributed_manager.analyze_distributed(binary_data, features)
+                else:
+                    return await self._analyze_parallel(binary_data, features)
+            except Exception as e:
+                raise AnalysisError(f"Analysis operation failed: {e}")
 
         # Execute with error recovery
-        result = await error_recovery_manager.execute_with_recovery(
-            _analysis_operation,
-            f"binary_analysis_{'distributed' if use_distributed else 'parallel'}",
-            binary_data,
-            features
-        )
+        try:
+            result = await error_recovery_manager.execute_with_recovery(
+                _analysis_operation,
+                f"binary_analysis_{'distributed' if use_distributed else 'parallel'}",
+                binary_data,
+                features
+            )
+        except Exception as e:
+            global_error_handler.handle_error(e, {
+                "operation": "binary_analysis",
+                "features": features,
+                "binary_size": len(binary_data),
+                "distributed": use_distributed
+            })
+            raise AnalysisError(f"Analysis failed: {e}")
+
+        # Enhance results with security metadata
+        result["security_metadata"] = {
+            "malware_indicators": malware_indicators,
+            "binary_size": len(binary_data),
+            "binary_hash": hashlib.sha256(binary_data).hexdigest(),
+            "file_type": file_type,
+            "analysis_timestamp": asyncio.get_event_loop().time()
+        }
 
         # Enhance results with LLM insights if available
         if self.llm_integration.is_available() and 'llm_enhancement' in features:
-            result = await self._enhance_with_llm(result)
+            try:
+                result = await self._enhance_with_llm(result)
+            except Exception as e:
+                logger.warning(f"LLM enhancement failed: {e}")
+                # Continue without LLM enhancement
 
         return result
 

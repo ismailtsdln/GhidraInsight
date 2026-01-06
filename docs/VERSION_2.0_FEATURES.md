@@ -884,10 +884,9 @@ mobile_results = result.mobile_analysis  # for APK/IPA
 
 ## 🆘 Support
 
-- **Documentation**: https://docs.ghidrainsight.dev
-- **GitHub Issues**: https://github.com/ghidrainsight/ghidrainsight/issues
-- **Email**: support@ghidrainsight.dev
-- **Enterprise Support**: enterprise@ghidrainsight.dev
+- **Developer**: Ismail Tasdelen  
+- **Email**: pentestdatabase@gmail.com  
+- **GitHub**: https://github.com/hexria/GhidraInsight
 
 ---
 

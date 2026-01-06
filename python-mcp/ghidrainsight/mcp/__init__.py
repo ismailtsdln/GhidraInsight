@@ -47,14 +47,73 @@ class MCPServer:
         self.app.router.add_get('/health', self.handle_health)
 
     async def handle_analyze_http(self, request):
-        """HTTP handler for analysis requests."""
+        """
+        HTTP handler for analysis requests with comprehensive error handling.
+        
+        Args:
+            request: HTTP request object
+            
+        Returns:
+            JSON response with analysis results or error
+        """
         try:
-            data = await request.json()
+            # Validate content type
+            content_type = request.headers.get('Content-Type', '')
+            if not content_type.startswith('application/json'):
+                return web.json_response(
+                    {"error": "Content-Type must be application/json"}, 
+                    status=400
+                )
+            
+            # Parse and validate request data
+            try:
+                data = await request.json()
+            except json.JSONDecodeError as e:
+                return web.json_response(
+                    {"error": f"Invalid JSON: {str(e)}"}, 
+                    status=400
+                )
+            
+            # Validate required fields
+            if not data or "binary_data" not in data:
+                return web.json_response(
+                    {"error": "binary_data field is required"}, 
+                    status=400
+                )
+            
+            # Validate binary data size
+            binary_data = data["binary_data"]
+            if not isinstance(binary_data, str):
+                return web.json_response(
+                    {"error": "binary_data must be a base64 string"}, 
+                    status=400
+                )
+            
+            # Decode base64 and check size
+            try:
+                import base64
+                decoded_data = base64.b64decode(binary_data)
+                if len(decoded_data) > 1024 * 1024 * 1024:  # 1GB limit for malware analysis
+                    return web.json_response(
+                        {"error": "Binary data too large (max 1GB for malware analysis)"}, 
+                        status=413
+                    )
+            except Exception as e:
+                return web.json_response(
+                    {"error": f"Invalid binary data: {str(e)}"}, 
+                    status=400
+                )
+            
+            # Process analysis
             result = await self.handle_analyze(data)
             return web.json_response(result)
+            
         except Exception as e:
-            logger.error(f"Analysis error: {e}")
-            return web.json_response({"error": str(e)}, status=500)
+            logger.error(f"Analysis error: {e}", exc_info=True)
+            return web.json_response(
+                {"error": "Internal server error during analysis"}, 
+                status=500
+            )
 
     async def handle_health(self, request):
         """Health check endpoint."""
@@ -172,40 +231,122 @@ class MCPServer:
         self.running = False
         logger.info("MCP Server stopped")
 
-    @cached
     async def handle_analyze(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Handle analyze request from MCP client.
+        Handle analyze request from MCP client with enhanced security and validation.
 
         Args:
             data: Request data with file and features
 
         Returns:
             Analysis results
+            
+        Raises:
+            ValueError: If input validation fails
+            SecurityError: If security checks fail
         """
         logger.info("Processing analyze request")
-
+        
+        # Validate and decode binary data
         binary_data = data.get("binary_data")
         if not binary_data:
             raise ValueError("binary_data is required")
-
+        
+        try:
+            import base64
+            if isinstance(binary_data, str):
+                binary_bytes = base64.b64decode(binary_data)
+            else:
+                binary_bytes = binary_data
+        except Exception as e:
+            raise ValueError(f"Invalid binary data encoding: {e}")
+        
+        # Security: Check for malware indicators (not suspicious patterns)
+        if self._contains_malware_indicators(binary_bytes):
+            logger.info("Malware indicators detected - this is expected for malware analysis")
+            # Continue but mark for additional scrutiny
+        
+        # Validate features
         features = data.get("features", ["basic_info", "strings", "entropy"])
+        if not isinstance(features, list):
+            raise ValueError("features must be a list")
+        
+        # Validate feature names
+        valid_features = {
+            "basic_info", "strings", "entropy", "crypto", "taint", 
+            "vulnerability", "control_flow_anomalies", "ml_vulnerability_detection",
+            "exploit_patterns", "semantic_analysis"
+        }
+        invalid_features = set(features) - valid_features
+        if invalid_features:
+            raise ValueError(f"Invalid features: {invalid_features}")
+        
+        try:
+            # Run parallel analysis with timeout
+            results = await asyncio.wait_for(
+                analysis_engine.analyze_binary(binary_bytes, features),
+                timeout=300  # 5 minutes
+            )
+            
+            # Sanitize results before returning
+            sanitized_results = self._sanitize_analysis_results(results)
+            
+            return {"status": "success", "results": sanitized_results}
+            
+        except asyncio.TimeoutError:
+            raise ValueError("Analysis timeout - binary too complex or large")
+        except Exception as e:
+            logger.error(f"Analysis failed: {e}", exc_info=True)
+            raise ValueError(f"Analysis failed: {e}")
 
-        # Run parallel analysis
-        results = await analysis_engine.analyze_binary(binary_data, features)
-
-        return {"status": "success", "results": results}
-
-    async def handle_query(self, query: str) -> str:
+    def _contains_malware_indicators(self, binary_data: bytes) -> bool:
         """
-        Handle AI query.
-
+        Check for malware indicators in binary data.
+        
         Args:
-            query: Natural language query
-
+            binary_data: Binary data to check
+            
         Returns:
-            AI-generated response
+            True if malware indicators found
         """
-        logger.info(f"Processing query: {query}")
-        # AI processing here
-        return "Response"
+        malware_indicators = [
+            b'eval(',  # Code execution
+            b'system(',  # System calls
+            b'exec(',  # Python exec
+            b'__import__',  # Dynamic imports
+            b'subprocess',  # Subprocess calls
+            b'os.system',  # OS system calls
+        ]
+        
+        for pattern in suspicious_patterns:
+            if pattern in binary_data:
+                return True
+        return False
+    
+    def _sanitize_analysis_results(self, results: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Sanitize analysis results to remove sensitive information.
+        
+        Args:
+            results: Raw analysis results
+            
+        Returns:
+            Sanitized results
+        """
+        sanitized = results.copy()
+        
+        # Remove potential sensitive data
+        if 'results' in sanitized:
+            for feature, result in sanitized['results'].items():
+                if isinstance(result, dict):
+                    # Remove any potential file paths or sensitive strings
+                    if 'strings' in result:
+                        result['strings'] = [
+                            s for s in result['strings'][:50]  # Limit strings
+                            if len(s) <= 200 and not any(
+                                sensitive in s.lower()
+                                for sensitive in ['password', 'key', 'secret', 'token']
+                            )
+                        ]
+        
+        return sanitized

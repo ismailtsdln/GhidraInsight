@@ -274,54 +274,68 @@ class GhidraInsightClient:
             logger.error(f"Status check failed: {e}")
             raise
     
-    async def _request(
-        self,
-        method: str,
-        endpoint: str,
-        **kwargs,
-    ) -> Dict[str, Any]:
+    async def _request(self, method: str, endpoint: str, **kwargs) -> Dict[str, Any]:
         """
-        Make HTTP request with retry logic.
+        Make HTTP request with retry logic and proper error handling.
         
         Args:
             method: HTTP method
             endpoint: API endpoint
-            **kwargs: Additional arguments for request
+            **kwargs: Additional request arguments
             
         Returns:
-            JSON response
+            Response JSON
             
         Raises:
-            ConnectionError: If request fails
+            ConnectionError: If connection fails
             TimeoutError: If request times out
+            ClientError: For other client errors
         """
         if not self._session:
-            raise ClientError("Client not initialized. Call await client.initialize()")
+            await self.initialize()
         
         url = f"{self.base_url}{endpoint}"
+        last_exception = None
         
         for attempt in range(self.max_retries + 1):
             try:
                 async with self._session.request(method, url, **kwargs) as response:
-                    if response.status == 200:
-                        return await response.json()
-                    elif response.status == 401:
-                        raise ClientError("Unauthorized: check API key/token")
+                    if response.status == 401:
+                        raise ClientError("Authentication failed")
+                    elif response.status == 403:
+                        raise ClientError("Access forbidden")
                     elif response.status == 404:
-                        raise ClientError(f"Not found: {endpoint}")
+                        raise ClientError("Endpoint not found")
+                    elif response.status == 429:
+                        retry_after = int(response.headers.get('Retry-After', 5))
+                        if attempt < self.max_retries:
+                            await asyncio.sleep(retry_after)
+                            continue
+                        raise ClientError("Rate limit exceeded")
                     elif response.status >= 500:
                         if attempt < self.max_retries:
-                            await asyncio.sleep(2 ** attempt)
+                            await asyncio.sleep(2 ** attempt)  # Exponential backoff
                             continue
                         raise ConnectionError(f"Server error: {response.status}")
-                    else:
-                        raise ClientError(f"Request failed: {response.status}")
+                    
+                    response_json = await response.json()
+                    return response_json
+                    
             except asyncio.TimeoutError:
-                raise TimeoutError(f"Request timeout after {self.timeout}s")
-            except ConnectionError as e:
-                if attempt == self.max_retries:
-                    raise
-                logger.warning(f"Request failed (attempt {attempt + 1}), retrying...")
-                await asyncio.sleep(2 ** attempt)
+                last_exception = TimeoutError(f"Request timeout after {self.timeout}s")
+                if attempt < self.max_retries:
+                    await asyncio.sleep(1)
+                    continue
+                raise last_exception
+            except aiohttp.ClientError as e:
+                last_exception = ConnectionError(f"Connection error: {e}")
+                if attempt < self.max_retries:
+                    await asyncio.sleep(1)
+                    continue
+                raise last_exception
+            except Exception as e:
+                last_exception = ClientError(f"Unexpected error: {e}")
+                raise
         
-        raise ConnectionError("Max retries exceeded")
+        # This should never be reached, but just in case
+        raise last_exception or ClientError("Request failed")

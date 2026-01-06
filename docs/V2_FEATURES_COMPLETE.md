@@ -563,11 +563,9 @@ Version 2.0 was made possible by:
 
 ## 📞 Contact & Support
 
-- **Website**: https://ghidrainsight.dev
-- **GitHub**: https://github.com/ghidrainsight/ghidrainsight
-- **Documentation**: https://docs.ghidrainsight.dev
-- **Email**: support@ghidrainsight.dev
-- **Enterprise**: enterprise@ghidrainsight.dev
+- **Developer**: Ismail Tasdelen  
+- **Email**: pentestdatabase@gmail.com  
+- **GitHub**: https://github.com/hexria/GhidraInsight
 
 ---
 
